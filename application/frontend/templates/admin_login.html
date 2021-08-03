@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Admin Login
+{%endblock title %}
+
+{% block content %}
+<section class="login-dark">
+    <!--h1 class="font-monospace text-center text-light" style="height: 140;">Admin Login</h1-->
+    <form class="text-start" method="post">
+        <h2 class="visually-hidden">Login Form</h2>
+        <div class="illustration"><i class="icon ion-android-person"></i></div>
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+        {{ form.adminId(class="form-control",placeholder="Admin ID" ) }}
+        </div>
+        <div class="mb-3">
+        {{ form.password(class="form-control" , placeholder="Password") }}
+        </div>
+        <div class="mb-3">
+        {{ form.submit(class="btn btn-primary d-block w-100") }}
+        </div>
+    </form>
+</section>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Modify User
+{%endblock title %}
+
+{% block content %}
+<section class="login-dark" >
+    <form method="post">
+        <h2 class="visually-hidden">Modify User</h2>
+        <h2 style="text-align:center;"><label class="form-label" >Modify User</label></h2>
+        <!-- <h2 style="text-align:center;"><div class="illustration"><i class="icon ion-android-person-add"></i></div></h2> -->
+        <div class="mb-3"></div>
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.name(class="form-control", placeholder="Username") }}
+            {% if form.name.errors %}
+                {{ form.name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor%}
+                    </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.check(class="btn btn-primary d-block w-100") }}
+        </div>
+
+        <div class="mb-3"></div>
+        {{ form.selectuid(class="selectpicker form-control", placeholder='Select UID', style='background: rgba(30,40,51,255);')}}
+        </div>
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary d-block w-100") }}
+        </div>
+    </form>
+</section>
+{% endblock content %}

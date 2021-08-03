@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+AddUser
+{% endblock title %}
+
+{% block content %}
+<section class="login-dark">
+    <form method="post">
+        <h2 class="visually-hidden">Add User Form</h2>
+        <h2 style="text-align:center;"><label class="form-label" >Add User</label></h2>
+        <div class="mb-3"></div>
+        <div class="illustration"><i class="icon ion-android-person-add"></i></div>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.userId(class="form-control", placeholder="User Id") }}
+                {% if form.userId.errors %}
+                    {{ form.userId(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.userId.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor%}
+                        </div>
+                {% else %}
+                {{ form.userId(class="form-control", placeholder="User Id") }}
+                {% endif %}
+            </div>
+            <div class="input-group mb-4">
+                {{ form.date(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.gender(class="form-control", placeholder="Gender") }}
+            </div>
+            <div class="mb-3">
+                {{ form.password(class="form-control" , placeholder="Password") }}
+            </div>
+            <div class="mb-3">
+                {{ form.submit(class="btn btn-primary d-block w-100") }}
+            </div>
+    </form>
+</section>
+
+{% endblock content %}

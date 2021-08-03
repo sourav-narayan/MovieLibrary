@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ movie.title }}
+{% endblock title %}
+
+{% block content %}
+<img style="max-height: 600px;max-width: 400px;margin-left:40%;margin:right:40%;margin-top:100px;" src="{{ url_for('static', filename= 'images/'+movie.movieId|string ~ '.jpg') }}">
+    <ul style="margin-left:35%;margin-right:30%;margin-top:50px;">
+        <li style="font-family: 'Georgia', serif;font-size: 25px;color:white;"><b>MovieId:</b> {{ movie.movieId }}</li>
+        <li style="font-family: 'Georgia', serif;font-size: 25px;color:white;"><b>Title:</b> {{ movie.title }}</li>
+        <li style="font-family: 'Georgia', serif;font-size: 25px;color:white;"><b>Genre:</b> {{ movie.genre }}</li>
+        <li style="font-family: 'Georgia', serif;font-size: 25px;color:white;"><b>Rating:</b> {{ movie.avg_ratings }}</li>
+        <li style="font-family: 'Georgia', serif;font-size: 25px;color:white;"><b>Description:</b>&nbsp;<br>{{ movie.description }}</li>
+            <br><br><br></li>
+    </ul>
+    {% if rating %}
+<br><br>
+    <div class="table-responsive" style="width: 800px;margin: auto;font-family: 'Abhaya Libre', serif;font-size: 25px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="font-family: 'Georgia', serif;font-size: 30px;margin: auto;color:white;">User name</th>
+                    <th style="font-family: 'Georgia', serif;font-size: 30px;margin: auto;color:white;">Ratings</th>
+                    <th style="font-family: 'Georgia', serif;font-size: 30px;margin: auto;color:white;">Review</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in rating %}
+                <tr>
+                    <td style="font-family: 'Georgia', serif;font-size: 30px;margin: auto;color:white;">{{item.username}}</td>
+                    <td style="font-family: 'Georgia', serif;font-size: 30px;margin: auto;color:white;">{{item.rating}}</td>
+                    <td style="font-family: 'Georgia', serif;font-size: 30px;margin: auto;color:white;">{{item.reviews}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+<br>
+<form method="post">{{ form.hidden_tag() }}
+{{ form.rating(class="form-control", placeholder="Rating",style="width:50%;margin-left: 25%;margin-top: 50px;") }}
+{{ form.review(class="form-control", placeholder="Review",style="width:50%;margin-left: 25%;margin-top: 50px;") }}
+<br>
+{% if not rate %}
+{{ form.addrating(class="btn btn-primary", style="background: #355a91;margin-left: 30%;margin-top: 10px;margin-bottom: 10px;display:inline-block;") }}
+{% else %}
+{{ form.modifyrating(class="btn btn-primary", style="background: #355a91;margin-left: 5%;margin-top: 10px;margin-bottom: 10px;display:inline-block;") }}
+{{ form.deleterating(class="btn btn-primary", style="background: #355a91;margin-left: 5%;margin-top: 10px;margin-bottom: 10px;display:inline-block;") }}
+{% endif %}
+</form>
+
+{% if rec_obj %}
+    <div class="row">
+    <div class="col-12">
+        <br><div style="background-color:lightgoldenrodyellow"> <h3 style="text-align: center;">Recommendations </h3></div>
+        <div class="container">
+            <div class="row g-2">
+                {% for item in rec_obj %}
+                <div class="col-6 ">
+                    <a style='text-decoration:none;' href ="{{url_for('movie_display_page', movieId=item.movieId)}}">
+                    <div class="card " style="width: 25rem; color: black; margin: 1rem;">
+                        <img src="{{ url_for('static', filename= 'images/'+item.movieId|string ~ '.jpg') }}" class="card-img-top"
+                             alt="Movie Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.title}}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">Genre:  {{item.genre}}</li>
+                            <li class="list-group-item">Rating: {{item.avg_ratings}}</li>
+                        </ul>
+                            </div>
+
+                    </a>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock content %}

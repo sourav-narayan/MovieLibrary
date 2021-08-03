@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href={{url_for('static',filename='assets/bootstrap/css/bootstrap.min.css')}}>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abhaya+Libre&amp;display=swap">
+    <link rel="stylesheet" href={{url_for('static',filename='assets/css/styles.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/css/Features-Blue.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/css/Features-Boxed.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/css/Footer-Dark.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/css/Header-Blue.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/css/Login-Form-Dark.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/fonts/ionicons.min.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='assets/fonts/font-awesome.min.css')}}>
+    <title>
+    {% block title%}
+
+    {% endblock title%}
+    </title>
+
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for cat, message in messages %}
+    <div class="alert alert-{{ cat }}" role="alert">
+        {{ message }}
+        <button class="m1-2 mb-1 close" type="button" data-dismiss="alert" aria-label="close" style="float:right">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <header class="header-blue">
+        {% if  el and not current_user.is_authenticated %}
+        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Movie Library</a>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav">
+                        <li><a class="btn btn-light action-button" role="button" href="{{url_for('user_login_page')}}">Log In</a></li>
+                        <li><a class="btn btn-light action-button" role="button" href="{{url_for('admin_login_page')}}" style="margin-left: 10px;">Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% endif %}
+        {% if el and current_user.is_authenticated and not current_user.id|string == '1234' and not active_admin_login and not active_login and not active_register %}
+        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{url_for('home_page')}}">Movie Library</a>
+                <div class="collapse navbar-collapse " id="navcol-2">
+                <ul class="nav navbar-nav">
+                    <li><a class="btn btn-light action-button" role="button" href="{{url_for('library_page')}}">Library</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="navbar-text">Welcome, {{ current_user.username }}</li>
+                    <li><a  class="btn btn-light action-button" href="{{url_for('logout_page')}}" style="margin-left: 10px;">Log out</a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        {% endif %}
+        {% if not el and current_user.is_authenticated and not current_user.id|string == '1234' and not active_admin_login and not active_login and not active_register %}
+        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{url_for('home_page')}}">Movie Library</a>
+                <div class="collapse navbar-collapse" id="navcol-3">
+                <ul class="nav navbar-nav" >
+                    <li><a class="btn btn-light action-button" role="button" href="{{url_for('library_page')}}" >Library</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto" >
+                    <li class="navbar-text">Welcome, {{ current_user.username }}</li>
+                    <li><a  class="btn btn-light action-button" href="{{url_for('logout_page')}}" style="margin-left: 10px;">Log out</a>
+                </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        {% endif %}
+        {% if current_user.is_authenticated and current_user.id|string == '1234' and not active_admin_login and not active_login and not active_register %}
+        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{url_for('home_page')}}">Movie Library</a>
+                <div class="collapse navbar-collapse" id="navcol-4">
+                <ul class="nav navbar-nav" >
+                    <li><a class="btn btn-light action-button" role="button" href="{{url_for('admin_page')}}" >Dashboard</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto" >
+                    <li class="navbar-text">Welcome, {{ current_user.username }}</li>
+                    <li><a  class="btn btn-light action-button" href="{{url_for('logout_page')}}" style="margin-left: 10px;">Log out</a>
+                </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% endif %}
+    {% block content%}
+
+    {% endblock content %}
+    </header>
+        <footer class="footer-dark" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 item text">
+                        <h3>Movie Library</h3>
+                        <p></p>
+                    </div>
+                </div>
+                <p class="copyright">Movie Library © 2021</p>
+            </div>
+        </footer>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src={{url_for('static',filename="assets/bootstrap/js/bootstrap.min.js")}}></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+</html>

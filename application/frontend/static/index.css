@@ -1,0 +1,37 @@
+.myhomecard{
+    width: 50vw;
+    height: 30vh;
+    text-align: center;
+    margin: 0.75rem;
+    color: white;
+    margin: 3rem auto;
+    background-color: #333232;
+    border:1px solid #313131;
+}
+
+.mygamecard{
+    height: 25vh;
+    color: black !important;
+    background-color: #323232;
+    border: 1px solid #313131;
+    margin:0.5rem;
+}
+
+.mytable{
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+}
+
+.row{
+    margin: 1rem ;
+}
+
+.modal-content{
+    background-color: #212121;
+    color: white;
+}
+
+body {
+        background-color: #212121;
+        color: white
+    }

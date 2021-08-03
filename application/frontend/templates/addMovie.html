@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Add Movie
+{% endblock title%}
+
+
+{% block content%}
+    <section class="login-dark" >
+        <form method="post"  enctype="multipart/form-data">
+            <h2 class="visually-hidden">Login Form</h2>
+            <h2 style="text-align:center;"><label class="form-label">Add Movie</label></h2>
+
+            <!-- <div class="illustration"><i class="icon ion-android-person-add"></i></div> -->
+            <div class="mb-3"></div>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.movieId(class="form-control", placeholder="Movie Id") }}
+                {% if form.movieId.errors %}
+                    {{ form.movieId(class="form-control form-control-lg is-invaid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.userId.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor%}
+                        </div>
+                {% else %}
+                {{ form.title(class="form-control", placeholder="Title") }}
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.description(class="form-control", placeholder="Description") }}
+            </div>
+            <div class="mb-3">
+                {{ form.genre(class="form-control" , placeholder="Comedy|Action|Romance") }}
+            </div>
+            <div class="mb-3">
+                {{ form.imageupload(class="form-control form-control-lg",type="file", placeholder="Upload Image")}}
+            </div>
+            <div class="mb-3">
+                {{ form.submit(class="btn btn-primary d-block w-100") }}
+            </div>
+        </form>
+    </section>
+{% endblock content %}

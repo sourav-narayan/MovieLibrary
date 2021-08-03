@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Admin
+{% endblock title %}
+
+{% block content %}
+<section class="features-boxed"></section>
+<section class="features-blue" >
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">Admin</h2>
+        </div>
+        <div class="row features">
+
+            <div class="col-sm-6 col-md-4 item">
+                <a href="{{ url_for( 'admin_user_add_page' ) }}">
+                <button class="btn btn-primary" data-target="#modal1" data-toggle="modal" style="margin: 0px 0px 0px;margin-right: 50px;margin-left: 83px;margin-top: 10px;"
+                        type="button">Add User
+                </button>
+                    </a>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 item">
+                <a href="{{ url_for( 'admin_user_modify_page1' ) }}">
+                <button class="btn btn-primary" data-target="#modal1" data-toggle="modal" style="margin-top: 10px;margin-right: 50px;margin-left: 83px;"
+                        type="button">Modify User
+                </button>
+                    </a>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 item">
+                <a href="{{ url_for( 'admin_user_delete_page' ) }}">
+                <button class="btn btn-primary" data-target="#modal1" data-toggle="modal" style="margin-top: 10px;margin-left: 83px;margin-right: 50px;"
+                        type="button">Delete User
+                </button>
+                <h3 class="name"></h3>
+                    </a>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 item">
+                <a href="{{ url_for( 'admin_movie_add_page' ) }}">
+                <button class="btn btn-primary" data-target="#modal1" data-toggle="modal" style="margin-left: 75px;margin-top: 10px;margin-right: 50px;"
+                        type="button">Add Movies
+                </button>
+                    </a>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 item">
+                <a href="{{ url_for( 'admin_movie_modify_page1' ) }}">
+                <button class="btn btn-primary" data-target="#modal1" data-toggle="modal" style="margin-top: 10px;margin-right: 50px;margin-left: 75px;"
+                        type="button">Modify Movies
+                </button>
+                    </a>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 item">
+                <a href="{{ url_for( 'admin_movie_delete_page' ) }}">
+                <button class="btn btn-primary" data-target="#modal1" data-toggle="modal" style="margin-top: 10px;margin-right: 50px;margin-left: 75px;"
+                        type="button">Delete Movies
+                </button>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Movie
+{%endblock title %}
+
+{% block content %}
+<section class="login-dark">
+    <form method="post" >
+        <h2 class="visually-hidden">Login Form</h2>
+        <h2 style="text-align:center;"><label class="form-label">Delete Movie</label></h2>
+        <div class="mb-3"></div>
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.genre(class="form-control", placeholder="Genre") }}
+            {% if form.genre.errors %}
+                {{ form.genre(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.genre.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor%}
+                    </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.check(class="btn btn-primary d-block w-100") }}
+        </div>
+
+        <div class="mb-3"></div>
+        {{ form.selectmid(class="selectpicker form-control", placeholder='Select MovieId', style='background: rgba(30,40,51,255);')}}
+        </div>
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary d-block w-100") }}
+        </div>
+    </form>
+</section>
+{% endblock content %}

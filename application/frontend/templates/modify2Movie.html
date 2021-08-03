@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Modify Movie
+{%endblock title %}
+
+{% block content %}
+<section class="login-dark" >
+    <form method="post" enctype="multipart/form-data">
+        <h2 class="visually-hidden">Login Form</h2>
+        <h2 style="text-align:center;"><label class="form-label" >Modify Movie</label></h2>
+        <div class="mb-3"></div>
+        <div class="mb-3">
+            {{ form.hidden_tag() }}
+        {{ form.title(class="form-control", placeholder="Title") }}
+        </div>
+        <div class="mb-3">
+            {{ form.description(class="form-control", placeholder="Description") }}
+        </div>
+        <div class="mb-3">
+            {{ form.genre(class="form-control" , placeholder="Genre") }}
+        </div>
+        <div class="mb-3">
+            {{ form.imageupload(class="form-control form-control-lg",type="file", placeholder="Upload Image")}}
+        </div>
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary d-block w-100") }}
+        </div>
+    </form>
+</section>
+{% endblock content %}

@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Movie Library
+{% endblock title %}
+
+
+{% block content %}
+<form method="post">
+{{ form.hidden_tag() }}
+{{ form.title_movId(class="form-control",placeholder="Title or MovieId" ,style="display:inline-block;width:54%;") }}
+{{ form.genre(class="form-control",placeholder="Genre",style="display:inline-block;width:34%;" ) }}
+{{ form.submit(class="btn btn-primary",style="display:inline-block;width:10%;") }}
+{% if gen %}
+<div style="display:flex;flex-direction:row-reverse;margin-top:10px;margin-right:2%">
+{{ form.selectsort(class="btn btn-light action-button ", style='background:transparent;') }}<b style="color:white;">Genre: </b>
+{% endif %}
+</div>
+    <br>
+</form>
+{% if top_rec %}
+    <div class="row">
+    <div class="col-12">
+        <br><div style="background-color:lightgoldenrodyellow"> <h3 style="text-align: center;">Trending Now </h3></div>
+        <div class="container">
+            <div class="row g-2">
+                {% for item in top_rec %}
+                <div class="col-6 ">
+                    <a style='text-decoration:none;' href ="{{url_for('movie_display_page', movieId=item.movieId)}}">
+                    <div class="card " style="width: 25rem; color: black; margin: 1rem;">
+                        <img src="{{ url_for('static', filename= 'images/'+item.movieId|string ~ '.jpg') }}" class="card-img-top"
+                             alt="Movie Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.title}}</h5>
+                            <p class="card-text">{{item.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">Genre:  {{item.genre}}</li>
+                            <li class="list-group-item">Rating: {{item.avg_ratings}}</li>
+                        </ul>
+                            </div>
+
+                    </a>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if allmov %}
+    <div class="row">
+    <div class="col-12">
+        <br>
+        <div style="background-color:lightgoldenrodyellow"><h3 style="text-align: center;">All Movies</h3></div>
+        <div class="container">
+            <div class="row g-2">
+                {% for item in allmov %}
+                <div class="col-6 ">
+                    <a style='text-decoration:none;' href ="{{url_for('movie_display_page', movieId=item.movieId)}}">
+                    <div class="card " style="width: 25rem; color: black; margin: 1rem;">
+                        <img src="{{ url_for('static', filename= 'images/'+item.movieId|string ~ '.jpg') }}" class="card-img-top"
+                             alt="Movie Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.title}}</h5>
+                            <p class="card-text">{{item.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">{{item.genre}}</li>
+                            <li class="list-group-item">{{item.avg_ratings}}</li>
+                        </ul>
+                        </div>
+                    </a>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+    {% if mov_obj %}
+    <div class="row">
+    <div class="col-12">
+
+        <br><div style="background-color:lightgoldenrodyellow"><h3 style="text-align: center;">Movies</h3></div>
+        <div class="container">
+            <div class="row g-2">
+                {% if iterab %}
+                {% for item in mov_obj %}
+                <div class="col-6 ">
+                    <a style='text-decoration:none;' href ="{{url_for('movie_display_page', movieId=item.movieId)}}">
+                    <div class="card " style="width: 25rem; color: black; margin: 1rem;">
+                        <img src="{{ url_for('static', filename= 'images/'+item.movieId|string ~ '.jpg') }}" class="card-img-top"
+                             alt="Movie Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.title}}</h5>
+                            <p class="card-text">{{item.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">{{item.genre}}</li>
+                            <li class="list-group-item">{{item.avg_ratings}}</li>
+                        </ul>
+                        </div>
+                    </a>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-6 ">
+                    <a style='text-decoration:none;' href ="{{url_for('movie_display_page', movieId=mov_obj.movieId)}}">
+                    <div class="card " style="width: 25rem; color: black; margin: 1rem;">
+                        <img src="{{ url_for('static', filename= 'images/'+mov_obj.movieId|string ~ '.jpg') }}" class="card-img-top"
+                             alt="Movie Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{mov_obj.title}}</h5>
+                            <p class="card-text">{{mov_obj.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">{{mov_obj.genre}}</li>
+                            <li class="list-group-item">{{mov_obj.avg_ratings}}</li>
+                        </ul>
+                        </div>
+                    </a>
+                    </div>
+                {% endif %}
+
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock content %}
